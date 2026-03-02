@@ -87,13 +87,13 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-premium mb-8"
+          className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-5 sm:py-2 rounded-full glass-premium mb-8"
         >
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-green-400" />
           </span>
-          <span className="text-xs font-medium text-slate-400 tracking-wider uppercase">
+          <span className="text-[10px] sm:text-xs font-medium text-slate-400 tracking-wider uppercase">
             Department of Computer Science & Engineering
           </span>
         </motion.div>
@@ -137,7 +137,7 @@ export default function HeroSection() {
         >
           <Link
             href="/about"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-accent-purple text-white font-medium shadow-lg shadow-primary/25 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] transition-all duration-300"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 sm:px-8 sm:py-4 rounded-xl bg-gradient-to-r from-primary to-accent-purple text-white text-sm sm:text-base font-medium shadow-lg shadow-primary/25 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] transition-all duration-300"
           >
             Explore More
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -145,7 +145,7 @@ export default function HeroSection() {
 
           <Link
             href="/events"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-primary/40 text-slate-300 hover:text-white hover:border-primary/70 hover:bg-primary/5 font-medium transition-all duration-300"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 sm:px-8 sm:py-4 rounded-xl border border-primary/40 text-slate-300 hover:text-white hover:border-primary/70 hover:bg-primary/5 text-sm sm:text-base font-medium transition-all duration-300"
           >
             View Events
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

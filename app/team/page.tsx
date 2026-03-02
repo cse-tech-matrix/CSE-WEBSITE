@@ -49,7 +49,7 @@ function ScrollProgress() {
 function SectionDivider({ icon: Icon, title, subtitle }: { icon: typeof Users; title: string; subtitle?: string }) {
   return (
     <motion.div
-      className="relative flex flex-col items-center mb-10"
+      className="relative flex flex-col items-center mb-6 sm:mb-10"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -101,12 +101,12 @@ function LeadershipCard({ member, label, delay = 0 }: { member: TeamMember; labe
       className="group"
     >
       <motion.div whileHover={{ y: -10 }} transition={{ duration: 0.4 }}>
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-white/[0.05] to-white/[0.01] backdrop-blur-xl border border-white/[0.08] hover:border-primary/40 transition-all duration-700 p-8 sm:p-10 text-center shadow-[0_0_0_0_rgba(99,102,241,0)] hover:shadow-[0_0_80px_-15px_rgba(99,102,241,0.3)]">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white/[0.05] to-white/[0.01] backdrop-blur-xl border border-white/[0.08] hover:border-primary/40 transition-all duration-700 p-4 sm:p-8 md:p-10 text-center shadow-[0_0_0_0_rgba(99,102,241,0)] hover:shadow-[0_0_80px_-15px_rgba(99,102,241,0.3)]">
           <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
           {/* Label badge */}
           <motion.span
-            className="relative z-10 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent-purple/10 border border-primary/20 text-primary text-xs font-semibold tracking-wider uppercase mb-6"
+            className="relative z-10 inline-flex items-center gap-1 sm:gap-2 px-2.5 py-1 sm:px-5 sm:py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent-purple/10 border border-primary/20 text-primary text-[9px] sm:text-xs font-semibold tracking-wider uppercase mb-3 sm:mb-6"
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
@@ -116,7 +116,7 @@ function LeadershipCard({ member, label, delay = 0 }: { member: TeamMember; labe
           </motion.span>
 
           {/* Avatar */}
-          <div className="relative mx-auto mb-6 w-40 h-40 sm:w-48 sm:h-48">
+          <div className="relative mx-auto mb-3 sm:mb-6 w-24 h-24 sm:w-40 sm:h-40 md:w-48 md:h-48">
             <div
               className="absolute -inset-[3px] rounded-full animate-spin-slow"
               style={{ background: "conic-gradient(from 0deg, #6366f1, #a855f7, #06b6d4, #ec4899, #6366f1)" }}
@@ -132,8 +132,8 @@ function LeadershipCard({ member, label, delay = 0 }: { member: TeamMember; labe
             </div>
           </div>
 
-          <h3 className="relative z-10 text-xl sm:text-2xl font-bold text-white">{member.name}</h3>
-          <p className="relative z-10 mt-1 text-accent-purple font-medium text-sm sm:text-base">{member.role}</p>
+          <h3 className="relative z-10 text-sm sm:text-xl md:text-2xl font-bold text-white">{member.name}</h3>
+          <p className="relative z-10 mt-1 text-accent-purple font-medium text-xs sm:text-sm md:text-base">{member.role}</p>
         </div>
       </motion.div>
     </motion.div>
@@ -439,16 +439,16 @@ export default function TeamPage() {
           </section>
 
           {/* ─── HOD ─── */}
-          <section className="py-10 px-4">
+          <section className="py-6 sm:py-10 px-4">
             <div className="max-w-lg mx-auto">
               <LeadershipCard member={hod} label="Head of the Department" />
             </div>
           </section>
 
           {/* ─── Association Incharges ─── */}
-          <section className="py-10 px-4">
+          <section className="py-4 sm:py-10 px-4">
             <SectionDivider icon={Shield} title="Association Incharges" subtitle="Guiding the association with vision and expertise" />
-            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="max-w-4xl mx-auto grid grid-cols-2 gap-3 sm:gap-8">
               {incharges.map((member, i) => (
                 <LeadershipCard key={member.name} member={member} label="Association Incharge" delay={i * 0.15} />
               ))}
