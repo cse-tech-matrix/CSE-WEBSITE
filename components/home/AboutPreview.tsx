@@ -33,7 +33,7 @@ const features = [
 
 export default function AboutPreview() {
   return (
-    <section className="relative py-16 px-4 overflow-hidden">
+    <section className="relative py-10 px-4 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/[0.03] blur-[150px] rounded-full pointer-events-none" />
 

@@ -91,7 +91,7 @@ export const eventsData: EventYear[] = [
     year: "2024",
     events: [
       {
-        title: "Inter Department Event",
+        title: "Aura'24",
         date: "Oct 2024",
         description: "Collaborative events between different departments.",
         driveLink: "https://drive.google.com/drive/folders/1lPYTw-e2U0lG_yHxKz2luROgSzdlKcIf?usp=drive_link",
@@ -99,7 +99,7 @@ export const eventsData: EventYear[] = [
         category: "competition",
       },
       {
-        title: "Teachers Day",
+        title: "Teachers Day 2024",
         date: "Sep 2024",
         description: "Celebration honoring teachers with cultural programs and activities.",
         driveLink: "https://drive.google.com/drive/folders/1Z7-cK7oONpIpfL1h6oOB9f2MLx3-ASBE?usp=drive_link",

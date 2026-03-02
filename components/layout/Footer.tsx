@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, ArrowUpRight, Code } from "lucide-react";
 import { contactInfo } from "@/data/contact";
 
 const quickLinks = [
@@ -11,7 +11,6 @@ const quickLinks = [
   { href: "/events", label: "Events" },
   { href: "/contact", label: "Contact" },
   { href: "/grievance", label: "Grievance Redressal" },
-  { href: "/developers", label: "Developers" },
 ];
 
 export default function Footer() {
@@ -29,8 +28,8 @@ export default function Footer() {
             transition={{ duration: 0.6 }}
           >
             <Link href="/" className="flex items-center gap-3 mb-4 group">
-              <div className="relative w-10 h-10">
-                <img src="/logo/dept-logo.png" alt="CSE Dept Logo" className="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(99,102,241,0.3)]" style={{ mixBlendMode: "screen" }} />
+              <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-[var(--background)]">
+                <img src="/logo/logocse.png" alt="CSE Dept Logo" className="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(99,102,241,0.3)]" style={{ mixBlendMode: "screen" }} />
               </div>
               <div>
                 <span className="text-lg font-bold font-heading text-gradient">Tech Matrix</span>
@@ -133,9 +132,16 @@ export default function Footer() {
           <p className="text-xs text-slate-500">
             &copy; {new Date().getFullYear()} Tech Matrix — CSE Association, Nandha Engineering College.
           </p>
-          <p className="text-xs text-slate-600">
-            Crafted with passion by CSE students
-          </p>
+          <Link
+            href="/developers"
+            className="group inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:bg-primary/10 hover:border-primary/30 transition-all duration-300"
+          >
+            <Code className="w-3.5 h-3.5 text-primary" />
+            <span className="text-xs text-slate-400 group-hover:text-white transition-colors duration-300">
+              Meet the Developers
+            </span>
+            <ArrowUpRight className="w-3 h-3 text-slate-600 group-hover:text-primary transition-colors duration-300" />
+          </Link>
         </div>
       </div>
     </footer>

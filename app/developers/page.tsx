@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Code2, Palette, Server, Terminal, Sparkles } from "lucide-react";
+import { Code2, Palette, Server, Terminal } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingShapes from "@/components/effects/FloatingShapes";
@@ -239,60 +239,6 @@ export default function DevelopersPage() {
             </div>
           </section>
 
-          {/* Tech Stack */}
-          <section className="py-12 px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <motion.div
-                className="inline-flex items-center gap-2 mb-6"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <Sparkles className="w-5 h-5 text-accent-amber" />
-                <span className="text-sm text-slate-400 font-mono uppercase tracking-wider">Tech Stack</span>
-              </motion.div>
-              <motion.h2
-                className="text-4xl font-bold text-white mb-10"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                Built With
-              </motion.h2>
-              <motion.div
-                className="flex flex-wrap justify-center gap-3"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                {[
-                  { name: "Next.js 14", color: "#ffffff" },
-                  { name: "React 18", color: "#61dafb" },
-                  { name: "TypeScript", color: "#3178c6" },
-                  { name: "Tailwind CSS", color: "#06b6d4" },
-                  { name: "Framer Motion", color: "#a855f7" },
-                  { name: "Lucide Icons", color: "#f59e0b" },
-                ].map((tech, i) => (
-                  <motion.span
-                    key={tech.name}
-                    className="px-5 py-2.5 rounded-xl glass-premium text-sm font-medium text-slate-300 hover:text-white transition-all cursor-default"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.08 }}
-                    whileHover={{
-                      scale: 1.08,
-                      y: -4,
-                      boxShadow: `0 0 25px ${tech.color}20`,
-                    }}
-                    style={{ borderColor: `${tech.color}20` }}
-                  >
-                    {tech.name}
-                  </motion.span>
-                ))}
-              </motion.div>
-            </div>
-          </section>
         </main>
         <Footer />
       </PageTransition>

@@ -1,6 +1,6 @@
 export const contactInfo = {
   address: "Erode - Perundurai, Main Road, Vaikkaalmedu, Erode, Tamil Nadu 638052",
-  phone: "+91 82483 70733",
+  phone: "+91 82483 70733 (Mr. M. Kavikumar)",
   email: "cse.association.members@gmail.com",
   mapEmbedUrl:
     "https://www.google.com/maps?q=Nandha+Engineering+College,+Erode+-+Perundurai,+Main+Road,+Vaikkaalmedu,+Erode,+Tamil+Nadu+638052&output=embed",
@@ -11,7 +11,7 @@ export const contactInfo = {
   },
   grievanceFormUrl: "https://forms.gle/qjgFheJSK5JZN6aM6",
   coordinators: [
-    { name: "Ms. R. Abinaya", dept: "CSE III", phone: "+91 80154 89671" },
-    { name: "Mr. A. Mohamed Abu Bakkar Siddiq", dept: "CSE III", phone: "+91 93422 82902" },
+    { name: "Mr. R. Rupanarayanan", dept: "II Year", phone: "+91 63825 52533" },
+    { name: "Mr. M. Pradeesh", dept: "II Year", phone: "+91 94877 70881" },
   ],
 };

@@ -171,7 +171,7 @@ export default function SplashScreen() {
           <div className="relative z-10 flex flex-col items-center gap-6">
             {/* Dept logo with spring spin-in */}
             <motion.div
-              className="relative w-24 h-24 sm:w-28 sm:h-28"
+              className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-[var(--background)]"
               initial={{ opacity: 0, scale: 0, rotate: -180 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{
@@ -182,7 +182,7 @@ export default function SplashScreen() {
               }}
             >
               <img
-                src="/logo/dept-logo.png"
+                src="/logo/logocse.png"
                 alt="CSE Dept Logo"
                 className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(99,102,241,0.4)]"
                 style={{ mixBlendMode: "screen" }}

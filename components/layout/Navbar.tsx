@@ -13,7 +13,6 @@ const navLinks = [
   { href: "/team", label: "Team" },
   { href: "/events", label: "Events" },
   { href: "/contact", label: "Contact" },
-  { href: "/developers", label: "Developers" },
 ];
 
 export default function Navbar() {
@@ -49,12 +48,12 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
               <motion.div
-                className="relative w-10 h-10"
+                className="relative w-10 h-10 rounded-lg overflow-hidden bg-[var(--background)]"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.3 }}
               >
                 <img
-                  src="/logo/dept-logo.png"
+                  src="/logo/logocse.png"
                   alt="CSE Dept Logo"
                   className="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(99,102,241,0.3)]"
                   style={{ mixBlendMode: "screen" }}
@@ -112,14 +111,17 @@ export default function Navbar() {
                   Grievance Redressal
                 </Link>
               </motion.div>
+
             </div>
 
-            {/* Mobile Toggle */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors"
-              aria-label="Toggle menu"
-            >
+            {/* Mobile Controls */}
+            <div className="lg:hidden flex items-center gap-2">
+              {/* Menu Toggle */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors"
+                aria-label="Toggle menu"
+              >
               <AnimatePresence mode="wait">
                 {isOpen ? (
                   <motion.div
@@ -144,6 +146,7 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </button>
+            </div>
           </div>
         </nav>
       </motion.header>

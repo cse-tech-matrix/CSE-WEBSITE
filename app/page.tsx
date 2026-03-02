@@ -2,18 +2,17 @@
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ParticleField from "@/components/effects/ParticleField";
 import FloatingShapes from "@/components/effects/FloatingShapes";
 import PageTransition from "@/components/layout/PageTransition";
 import HeroSection from "@/components/home/HeroSection";
 import AboutPreview from "@/components/home/AboutPreview";
 import StatsSection from "@/components/home/StatsSection";
 import CTASection from "@/components/home/CTASection";
+import HighlightsSection from "@/components/home/HighlightsSection";
 
 export default function Home() {
   return (
     <>
-      <ParticleField />
       <FloatingShapes />
       <Navbar />
       <PageTransition>
@@ -21,6 +20,7 @@ export default function Home() {
           <HeroSection />
           <AboutPreview />
           <StatsSection />
+          <HighlightsSection />
           <CTASection />
         </main>
         <Footer />

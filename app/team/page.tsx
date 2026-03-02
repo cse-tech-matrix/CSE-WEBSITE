@@ -1,8 +1,11 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { Crown, Shield, Star, Sparkles, Users, Zap, ChevronDown } from "lucide-react";
+import { useRef, useMemo } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import {
+  Shield, Star, Sparkles, Users, ChevronDown,
+  Code, Calendar, Truck, Microscope, Palette, Video, PenTool, Layers,
+} from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingShapes from "@/components/effects/FloatingShapes";
@@ -18,133 +21,31 @@ import {
 import type { TeamMember } from "@/data/team";
 import { useIsMobile } from "@/lib/useIsMobile";
 
-/* ─── Card Wrapper (no tilt) ─── */
-function TiltCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <div className={className}>
-      {children}
-    </div>
-  );
-}
+/* ─── Category configuration ─── */
+const categories = [
+  { key: "Research & Development", icon: Microscope, gradient: "from-violet-500 to-purple-600", accent: "#8b5cf6", label: "Research & Development" },
+  { key: "Event Management", icon: Calendar, gradient: "from-orange-500 to-red-500", accent: "#f97316", label: "Event Management" },
+  { key: "Technical", icon: Code, gradient: "from-cyan-500 to-blue-600", accent: "#06b6d4", label: "Technical" },
+  { key: "Logistics", icon: Truck, gradient: "from-emerald-500 to-teal-600", accent: "#10b981", label: "Logistics" },
+  { key: "Web Designing", icon: Palette, gradient: "from-pink-500 to-rose-600", accent: "#ec4899", label: "Web Designing" },
+  { key: "Video Editing", icon: Video, gradient: "from-amber-500 to-yellow-600", accent: "#f59e0b", label: "Video Editing" },
+  { key: "Content Writing", icon: PenTool, gradient: "from-indigo-500 to-blue-600", accent: "#6366f1", label: "Content Writing" },
+  { key: "General", icon: Layers, gradient: "from-slate-500 to-zinc-600", accent: "#64748b", label: "General" },
+];
 
-/* ─── Premium Holographic Member Card ─── */
-function HoloCard({
-  member,
-  index,
-  size = "default",
-}: {
-  member: TeamMember;
-  index: number;
-  size?: "featured" | "default" | "compact";
-}) {
-  const sizeMap = {
-    featured: { img: "w-32 h-32 sm:w-40 sm:h-40", text: "text-lg sm:text-xl", pad: "p-6 sm:p-8" },
-    default: { img: "w-24 h-24 sm:w-28 sm:h-28", text: "text-base", pad: "p-5" },
-    compact: { img: "w-20 h-20 sm:w-24 sm:h-24", text: "text-sm", pad: "p-4" },
-  };
-  const s = sizeMap[size];
-
+/* ─── Scroll Progress Bar ─── */
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50, scale: 0.9 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.7, delay: index * 0.05, ease: [0.23, 1, 0.32, 1] }}
-      className="h-full"
-    >
-      <TiltCard className="h-full">
-        <motion.div
-          whileHover={{ y: -12, scale: 1.03 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="group h-full"
-        >
-          <div
-            className={`relative overflow-hidden rounded-2xl h-full flex flex-col items-center text-center
-            glass-premium
-            hover:border-primary/40
-            transition-all duration-700 ${s.pad}
-            shadow-[0_0_0_0_rgba(99,102,241,0)] hover:shadow-[0_0_50px_-8px_rgba(99,102,241,0.3)]`}
-          >
-            {/* Animated holographic sweep */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
-            </div>
-
-            {/* Animated border gradient on hover */}
-            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-primary/30 via-accent-purple/30 to-accent-cyan/30 animate-border" />
-              <div className="absolute inset-0 rounded-2xl bg-background" />
-            </div>
-
-            {/* Corner accent dots */}
-            <div className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-primary/30 group-hover:bg-primary group-hover:shadow-[0_0_8px_rgba(99,102,241,0.6)] transition-all duration-500" />
-            <div className="absolute bottom-2 left-2 w-1.5 h-1.5 rounded-full bg-accent-purple/30 group-hover:bg-accent-purple group-hover:shadow-[0_0_8px_rgba(168,85,247,0.6)] transition-all duration-500" />
-
-            {/* Avatar */}
-            <div className="relative mb-4 z-10">
-              <motion.div
-                className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-primary/50 via-accent-purple/50 to-accent-cyan/50 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-700"
-              />
-              <motion.div
-                className="absolute -inset-3 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-700"
-                style={{
-                  background: "conic-gradient(from 0deg, #6366f1, #a855f7, #06b6d4, #ec4899, #6366f1)",
-                }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              />
-              <div
-                className={`relative ${s.img} rounded-full overflow-hidden border-2 border-white/10 group-hover:border-primary/50 transition-all duration-500`}
-              >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-            </div>
-
-            {/* Tag badge */}
-            {member.tag && (
-              <motion.span
-                className="relative z-10 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-accent-amber/20 to-accent-pink/20 border border-accent-amber/30 text-accent-amber text-[10px] font-bold uppercase tracking-wider mb-2"
-                initial={{ scale: 0, rotate: -10 }}
-                whileInView={{ scale: 1, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 + 0.3, type: "spring", stiffness: 300 }}
-              >
-                <Crown className="w-2.5 h-2.5" />
-                {member.tag}
-              </motion.span>
-            )}
-
-            {/* Info */}
-            <h4 className={`relative z-10 font-bold text-white/90 group-hover:text-white transition-colors whitespace-nowrap ${s.text}`}>
-              {member.name}
-            </h4>
-
-            {member.role && (
-              <p className="relative z-10 mt-1 text-xs font-semibold text-accent-purple group-hover:text-accent-cyan transition-colors duration-500">
-                {member.role}
-              </p>
-            )}
-
-            {member.year && (
-              <p className="relative z-10 mt-1 text-[11px] text-slate-500 font-mono">{member.year}</p>
-            )}
-
-            {/* Bottom gradient line */}
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary/60 transition-all duration-700" />
-          </div>
-        </motion.div>
-      </TiltCard>
-    </motion.div>
+      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-accent-purple to-accent-cyan z-[60] origin-left"
+      style={{ scaleX }}
+    />
   );
 }
 
-/* ─── Animated Section Divider ─── */
+/* ─── Section Divider ─── */
 function SectionDivider({ icon: Icon, title, subtitle }: { icon: typeof Users; title: string; subtitle?: string }) {
   return (
     <motion.div
@@ -154,30 +55,19 @@ function SectionDivider({ icon: Icon, title, subtitle }: { icon: typeof Users; t
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
     >
-      {/* Glowing icon with pulse ring */}
       <motion.div
         className="relative mb-5"
         whileHover={{ rotate: 360, scale: 1.1 }}
         transition={{ duration: 0.6 }}
       >
         <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full animate-pulse-slow" />
-        <motion.div
-          className="absolute -inset-3 rounded-2xl"
-          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.1, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          <div className="w-full h-full rounded-2xl border border-primary/20" />
-        </motion.div>
         <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent-purple flex items-center justify-center shadow-lg shadow-primary/30">
           <Icon className="w-7 h-7 text-white" />
         </div>
       </motion.div>
-
-      {/* Title with staggered letters */}
       <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-center">
         <span className="text-gradient">{title}</span>
       </h2>
-
       {subtitle && (
         <motion.p
           className="mt-3 text-sm sm:text-base text-slate-400 text-center max-w-md"
@@ -189,8 +79,6 @@ function SectionDivider({ icon: Icon, title, subtitle }: { icon: typeof Users; t
           {subtitle}
         </motion.p>
       )}
-
-      {/* Animated underline */}
       <motion.div
         className="mt-4 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full"
         initial={{ width: 0, opacity: 0 }}
@@ -198,21 +86,12 @@ function SectionDivider({ icon: Icon, title, subtitle }: { icon: typeof Users; t
         viewport={{ once: true }}
         transition={{ duration: 1, delay: 0.2 }}
       />
-
-      {/* Side decorations */}
-      <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
-        <div className="flex-1 h-px bg-gradient-to-r from-transparent to-primary/20" />
-        <div className="w-40" />
-        <div className="flex-1 h-px bg-gradient-to-l from-transparent to-primary/20" />
-      </div>
     </motion.div>
   );
 }
 
-/* ─── Premium Leadership Card (HOD & Incharges) ─── */
+/* ─── Premium Leadership Card (HOD & Incharges) — NO crown ─── */
 function LeadershipCard({ member, label, delay = 0 }: { member: TeamMember; label: string; delay?: number }) {
-  const isMobile = useIsMobile();
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 50, scale: 0.95 }}
@@ -221,102 +100,225 @@ function LeadershipCard({ member, label, delay = 0 }: { member: TeamMember; labe
       transition={{ duration: 0.9, delay, ease: [0.23, 1, 0.32, 1] }}
       className="group"
     >
-      <TiltCard>
-        <motion.div
-          whileHover={{ y: -10 }}
-          transition={{ duration: 0.4 }}
-        >
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-white/[0.05] to-white/[0.01] backdrop-blur-xl border border-white/[0.08] hover:border-primary/40 transition-all duration-700 p-8 sm:p-10 text-center shadow-[0_0_0_0_rgba(99,102,241,0)] hover:shadow-[0_0_80px_-15px_rgba(99,102,241,0.3)]">
-            {/* Background mesh */}
-            <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
+      <motion.div whileHover={{ y: -10 }} transition={{ duration: 0.4 }}>
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-white/[0.05] to-white/[0.01] backdrop-blur-xl border border-white/[0.08] hover:border-primary/40 transition-all duration-700 p-8 sm:p-10 text-center shadow-[0_0_0_0_rgba(99,102,241,0)] hover:shadow-[0_0_80px_-15px_rgba(99,102,241,0.3)]">
+          <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
-            {/* Aurora effect */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-              <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-conic-gradient animate-spin-slower opacity-5" />
-            </div>
+          {/* Label badge */}
+          <motion.span
+            className="relative z-10 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent-purple/10 border border-primary/20 text-primary text-xs font-semibold tracking-wider uppercase mb-6"
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: delay + 0.3, type: "spring", stiffness: 200 }}
+          >
+            {label}
+          </motion.span>
 
-            {/* Floating particles — desktop only */}
-            {!isMobile && [...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 rounded-full bg-primary/30"
-                style={{ top: `${15 + i * 13}%`, left: `${8 + i * 16}%` }}
-                animate={{ y: [0, -20, 0], opacity: [0.2, 0.8, 0.2], scale: [0.5, 1.2, 0.5] }}
-                transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+          {/* Avatar */}
+          <div className="relative mx-auto mb-6 w-40 h-40 sm:w-48 sm:h-48">
+            <div
+              className="absolute -inset-[3px] rounded-full animate-spin-slow"
+              style={{ background: "conic-gradient(from 0deg, #6366f1, #a855f7, #06b6d4, #ec4899, #6366f1)" }}
+            />
+            <div className="absolute inset-[2px] rounded-full bg-background" />
+            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-transparent">
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover"
+                loading="lazy"
               />
-            ))}
-
-            {/* Label */}
-            <motion.span
-              className="relative z-10 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent-purple/10 border border-primary/20 text-primary text-xs font-semibold tracking-wider uppercase mb-6"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: delay + 0.3, type: "spring", stiffness: 200 }}
-            >
-              <Crown className="w-3.5 h-3.5" />
-              {label}
-            </motion.span>
-
-            {/* Avatar with rotating gradient ring */}
-            <div className="relative mx-auto mb-6 w-40 h-40 sm:w-48 sm:h-48">
-              {!isMobile ? (
-                <>
-                  <motion.div
-                    className="absolute -inset-3 rounded-full opacity-20 group-hover:opacity-60 blur-lg transition-opacity duration-700"
-                    style={{
-                      background: "conic-gradient(from 0deg, #6366f1, #a855f7, #06b6d4, #ec4899, #6366f1)",
-                    }}
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                  />
-                  <motion.div
-                    className="absolute -inset-[3px] rounded-full"
-                    style={{
-                      background: "conic-gradient(from 0deg, #6366f1, #a855f7, #06b6d4, #ec4899, #6366f1)",
-                    }}
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  />
-                </>
-              ) : (
-                <div
-                  className="absolute -inset-[3px] rounded-full"
-                  style={{
-                    background: "conic-gradient(from 0deg, #6366f1, #a855f7, #06b6d4, #ec4899, #6366f1)",
-                  }}
-                />
-              )}
-              <div className="absolute inset-[2px] rounded-full bg-background" />
-              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-transparent">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
-              </div>
             </div>
-
-            <h3 className="relative z-10 text-xl sm:text-2xl font-bold text-white">{member.name}</h3>
-            <p className="relative z-10 mt-1 text-accent-purple font-medium text-sm sm:text-base">{member.role}</p>
           </div>
-        </motion.div>
-      </TiltCard>
+
+          <h3 className="relative z-10 text-xl sm:text-2xl font-bold text-white">{member.name}</h3>
+          <p className="relative z-10 mt-1 text-accent-purple font-medium text-sm sm:text-base">{member.role}</p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
 
-/* ─── Scroll Progress Bar ─── */
-function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
+/* ─── Office Bearer Card ─── */
+function OfficeBearerCard({ member, index }: { member: TeamMember; index: number }) {
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-accent-purple to-accent-cyan z-[60] origin-left"
-      style={{ scaleX }}
-    />
+      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
+      className="h-full"
+    >
+      <motion.div
+        whileHover={{ y: -12, scale: 1.03 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="group h-full"
+      >
+        <div className="relative overflow-hidden rounded-2xl h-full flex flex-col items-center text-center glass-premium hover:border-primary/40 transition-all duration-700 p-6 sm:p-8">
+          <div className="relative mb-4 z-10">
+            <motion.div
+              className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-primary/50 via-accent-purple/50 to-accent-cyan/50 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-700"
+            />
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-primary/50 transition-all duration-500">
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          {member.role && (
+            <span className="relative z-10 inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-primary/15 to-accent-purple/15 border border-primary/25 text-primary text-[10px] font-bold uppercase tracking-wider mb-2">
+              {member.role}
+            </span>
+          )}
+          <h4 className="relative z-10 font-bold text-white/90 group-hover:text-white transition-colors text-base sm:text-lg">
+            {member.name}
+          </h4>
+          {member.year && (
+            <p className="relative z-10 mt-1 text-[11px] text-slate-500 font-mono">{member.year}</p>
+          )}
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary/60 transition-all duration-700" />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ─── Category Member Card ─── */
+function CategoryMemberCard({
+  member,
+  index,
+  accent,
+  isCore,
+}: {
+  member: TeamMember;
+  index: number;
+  accent: string;
+  isCore: boolean;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-20px" }}
+      transition={{ duration: 0.6, delay: index * 0.04, ease: [0.23, 1, 0.32, 1] }}
+      className="h-full"
+    >
+      <motion.div
+        whileHover={{ y: -8, scale: 1.03 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="group h-full"
+      >
+        <div className="relative overflow-hidden rounded-xl h-full flex flex-col items-center text-center glass-premium hover:border-primary/30 transition-all duration-500 p-4">
+          {/* Hover sweep */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+          </div>
+
+          {/* Avatar */}
+          <div className="relative mb-3 z-10">
+            <div
+              className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 transition-all duration-500"
+              style={{ borderColor: `${accent}30` }}
+            >
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* Info */}
+          <h4 className="relative z-10 font-bold text-white/90 group-hover:text-white transition-colors text-xs sm:text-sm leading-tight">
+            {member.name}
+          </h4>
+          <p className="relative z-10 mt-1 text-[10px] text-slate-500 font-mono">{member.year}</p>
+          <span
+            className="relative z-10 mt-1.5 inline-block px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide uppercase border"
+            style={{
+              color: accent,
+              borderColor: `${accent}40`,
+              background: `${accent}15`,
+            }}
+          >
+            {isCore ? "Core Member" : "Executive Member"}
+          </span>
+
+          {/* Bottom accent line */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-all duration-500"
+            style={{ background: `linear-gradient(to right, transparent, ${accent}, transparent)` }}
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ─── Category Section ─── */
+function CategorySection({
+  category,
+  members,
+  coreNames,
+  sectionIndex,
+}: {
+  category: typeof categories[0];
+  members: TeamMember[];
+  coreNames: Set<string>;
+  sectionIndex: number;
+}) {
+  const Icon = category.icon;
+
+  return (
+    <motion.section
+      className="py-8 px-4"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Category header */}
+        <motion.div
+          className="flex items-center gap-4 mb-6"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          <div
+            className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.gradient} flex items-center justify-center shadow-lg shrink-0`}
+          >
+            <Icon className="w-6 h-6 text-white" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-2xl sm:text-3xl font-bold text-white">{category.label}</h3>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="text-xs text-slate-500 font-mono">{members.length} members</span>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent" style={{ backgroundImage: `linear-gradient(to right, ${category.accent}30, transparent)` }} />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Members grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          {members.map((member, i) => (
+            <CategoryMemberCard
+              key={member.name}
+              member={member}
+              index={i}
+              accent={category.accent}
+              isCore={coreNames.has(member.name)}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.section>
   );
 }
 
@@ -324,8 +326,52 @@ function ScrollProgress() {
 export default function TeamPage() {
   const isMobile = useIsMobile();
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
+  // Build category groups from executive + core members
+  const { categoryGroups, coreNameSet } = useMemo(() => {
+    const coreNameSet = new Set(coreMembers.map((m) => m.name));
+    const allMembers = [...executiveMembers, ...coreMembers];
+
+    const grouped: Record<string, TeamMember[]> = {};
+    for (const member of allMembers) {
+      const tag = member.tag || "General";
+      if (!grouped[tag]) grouped[tag] = [];
+      // Avoid duplicates (if someone appears in both lists)
+      if (!grouped[tag].some((m) => m.name === member.name)) {
+        grouped[tag].push(member);
+      }
+    }
+
+    // Explicit ordering per category
+    const manualOrder: Record<string, string[]> = {
+      "Event Management": [
+        "Mr. M. Dhilip", "Mr. Santhosh Dinakaran", "Ms. S. Aashiqa Fathima",
+        "Ms. T. L. Jana Sri", "Mr. P. Y. Ashwin Uvraj", "Ms. Sruthi S",
+      ],
+      "Logistics": ["Mr. K. Rumesh Kumaran", "Mr. A. Mohamed Abu Bakkar Siddiq"],
+      "Web Designing": ["Mr. S. S. Arunesh", "Mr. M. Pradeesh", "Mr. U. Mahendran"],
+      "Video Editing": ["Mr. R. Sree Nandhu", "Mr. B. Harish Kumar", "Mr. Prithiv Krishna"],
+      "Content Writing": [
+        "Ms. T. Saarumathi", "Ms. S. Subaranjani", "Ms. A. K. Nandhana",
+        "Ms. S. Dhivya", "Ms. R. Shamiksha", "Ms. E. Subitcha", "Ms. R. Dhanu Shree",
+      ],
+    };
+    const yearOrder: Record<string, number> = { "IV Year": 0, "III Year": 1, "II Year": 2, "I Year": 3 };
+    for (const tag of Object.keys(grouped)) {
+      const order = manualOrder[tag];
+      if (order) {
+        grouped[tag].sort((a, b) => {
+          const ai = order.indexOf(a.name);
+          const bi = order.indexOf(b.name);
+          return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+        });
+      } else {
+        grouped[tag].sort((a, b) => (yearOrder[a.year] ?? 9) - (yearOrder[b.year] ?? 9));
+      }
+    }
+
+    return { categoryGroups: grouped, coreNameSet };
+  }, []);
 
   return (
     <>
@@ -340,39 +386,10 @@ export default function TeamPage() {
               <>
                 <GradientOrb className="-top-40 left-1/2 -translate-x-1/2" size={600} />
                 <GradientOrb className="top-20 -right-40" size={300} color="from-accent-cyan/10 to-primary/10" />
-                <GradientOrb className="top-40 -left-40" size={250} color="from-accent-pink/10 to-accent-purple/10" />
               </>
             )}
 
-            {/* Background particle field */}
-            {[...Array(isMobile ? 6 : 40)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-full"
-                style={{
-                  width: 1 + Math.random() * 2,
-                  height: 1 + Math.random() * 2,
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  background: i % 3 === 0 ? "rgba(99,102,241,0.4)" : i % 3 === 1 ? "rgba(168,85,247,0.3)" : "rgba(6,182,212,0.3)",
-                }}
-                animate={{
-                  y: [0, (Math.random() - 0.5) * 80],
-                  x: [0, (Math.random() - 0.5) * 50],
-                  opacity: [0, 0.7, 0],
-                  scale: [0.5, 1.5, 0.5],
-                }}
-                transition={{
-                  duration: 4 + Math.random() * 8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: Math.random() * 5,
-                }}
-              />
-            ))}
-
             <div className="relative z-10 max-w-4xl mx-auto">
-              {/* Badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, y: -20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -385,7 +402,6 @@ export default function TeamPage() {
                 </span>
               </motion.div>
 
-              {/* Title */}
               <motion.h1
                 className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight"
                 initial={{ opacity: 0, y: 40 }}
@@ -404,35 +420,6 @@ export default function TeamPage() {
                 The brilliant minds powering innovation, leadership, and tech excellence
               </motion.p>
 
-              {/* Decorative animated circles */}
-              <motion.div
-                className="mt-10 flex justify-center gap-3"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                {[...Array(5)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="w-2 h-2 rounded-full"
-                    style={{
-                      background: `linear-gradient(135deg, ${
-                        ["#6366f1", "#a855f7", "#06b6d4", "#ec4899", "#f59e0b"][i]
-                      }, ${
-                        ["#a855f7", "#06b6d4", "#ec4899", "#f59e0b", "#6366f1"][i]
-                      })`,
-                    }}
-                    animate={{
-                      scale: [1, 1.8, 1],
-                      opacity: [0.3, 1, 0.3],
-                      y: [0, -8, 0],
-                    }}
-                    transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.25, ease: "easeInOut" }}
-                  />
-                ))}
-              </motion.div>
-
-              {/* Scroll hint */}
               <motion.div
                 className="mt-12"
                 initial={{ opacity: 0 }}
@@ -473,38 +460,41 @@ export default function TeamPage() {
             <SectionDivider icon={Star} title="Office Bearers" subtitle="Leading from the front with dedication and passion" />
             <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6">
               {officeBearers.map((member, i) => (
-                <HoloCard key={member.name} member={member} index={i} size="featured" />
+                <OfficeBearerCard key={member.name} member={member} index={i} />
               ))}
             </div>
           </section>
 
-          {/* ─── Executive Members ─── */}
-          <section className="py-12 px-4">
-            <SectionDivider icon={Users} title="Executive Members" subtitle="The driving force behind every successful event" />
-            <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-              {executiveMembers.map((member, i) => (
-                <HoloCard key={member.name} member={member} index={i} size="compact" />
-              ))}
-            </div>
-          </section>
+          {/* ─── Category-based Member Sections ─── */}
+          <section className="py-10 px-4">
+            <SectionDivider
+              icon={Users}
+              title="Association Members"
+              subtitle="Organized by their domain expertise"
+            />
 
-          {/* ─── Core Members ─── */}
-          <section className="py-12 px-4">
-            <SectionDivider icon={Zap} title="Core Members" subtitle="The creative backbone of Tech Matrix" />
-            <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-              {coreMembers.map((member, i) => (
-                <HoloCard key={member.name} member={member} index={i} />
-              ))}
-            </div>
+            {categories.map((cat, i) => {
+              const members = categoryGroups[cat.key];
+              if (!members || members.length === 0) return null;
+              return (
+                <CategorySection
+                  key={cat.key}
+                  category={cat}
+                  members={members}
+                  coreNames={coreNameSet}
+                  sectionIndex={i}
+                />
+              );
+            })}
           </section>
 
           {/* ─── Group Photos ─── */}
           <section className="py-14 px-4">
             <div className="max-w-6xl mx-auto space-y-14">
               {[
-                { src: "/allmem/image.png", label: "CSE Association Team 2025-26", gradient: "from-primary/40 via-accent-purple/40 to-accent-cyan/40" },
-                { src: "/allmem/oldimage.png", label: "CSE Association Team 2024-25", gradient: "from-accent-purple/40 via-accent-pink/40 to-accent-amber/40" },
-              ].map((photo, i) => (
+                { src: "/allmem/image.jpg", label: "CSE Association Team 2025-26", gradient: "from-primary/40 via-accent-purple/40 to-accent-cyan/40" },
+                { src: "/allmem/oldimage.jpg", label: "CSE Association Team 2024-25", gradient: "from-accent-purple/40 via-accent-pink/40 to-accent-amber/40" },
+              ].map((photo) => (
                 <motion.div
                   key={photo.label}
                   className="relative group"
@@ -513,9 +503,7 @@ export default function TeamPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
                 >
-                  {/* Multi-layered glow */}
                   <div className={`absolute -inset-1 rounded-3xl bg-gradient-to-r ${photo.gradient} opacity-20 group-hover:opacity-50 blur-md transition-all duration-1000`} />
-                  <div className={`absolute -inset-px rounded-3xl bg-gradient-to-r ${photo.gradient} opacity-30 group-hover:opacity-60 blur-sm transition-opacity duration-700`} />
 
                   <div className="relative rounded-3xl overflow-hidden bg-background">
                     <img
@@ -524,21 +512,20 @@ export default function TeamPage() {
                       className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-1000"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 flex justify-center">
-                      <motion.div
-                        className="glass-premium px-8 py-4 rounded-2xl"
-                        initial={{ y: 20, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        <h3 className="text-xl sm:text-2xl font-bold text-white text-center">
-                          {photo.label}
-                        </h3>
-                      </motion.div>
-                    </div>
                   </div>
+
+                  {/* Label below the photo */}
+                  <motion.div
+                    className="mt-4 flex justify-center"
+                    initial={{ y: 10, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <div className="glass-premium px-6 sm:px-8 py-3 sm:py-4 rounded-2xl">
+                      <h3 className="text-base sm:text-xl md:text-2xl font-bold text-white text-center">{photo.label}</h3>
+                    </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </div>

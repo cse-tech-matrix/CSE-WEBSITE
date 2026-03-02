@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Orbitron, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import GlobalEffects from "@/components/layout/GlobalEffects";
 import SplashScreen from "@/components/layout/SplashScreen";
+import MatrixRain from "@/components/effects/MatrixRain";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -51,8 +51,8 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${orbitron.variable} ${jetbrains.variable} font-sans antialiased`}
       >
+        <MatrixRain />
         <SplashScreen />
-        <GlobalEffects />
         {children}
       </body>
     </html>
