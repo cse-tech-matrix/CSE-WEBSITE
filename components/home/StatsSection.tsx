@@ -18,7 +18,7 @@ export default function StatsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative glass-premium rounded-3xl p-10 md:p-14 neon-glow overflow-hidden"
+          className="relative glass-premium rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-14 neon-glow overflow-hidden"
         >
           <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
 

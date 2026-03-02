@@ -65,7 +65,7 @@ function SectionDivider({ icon: Icon, title, subtitle }: { icon: typeof Users; t
           <Icon className="w-7 h-7 text-white" />
         </div>
       </motion.div>
-      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-center">
+      <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-center">
         <span className="text-gradient">{title}</span>
       </h2>
       {subtitle && (
@@ -403,7 +403,7 @@ export default function TeamPage() {
               </motion.div>
 
               <motion.h1
-                className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight"
+                className="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tight"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}

@@ -62,7 +62,7 @@ export default function EventsPage() {
                 <span className="text-xs text-slate-400 tracking-wider uppercase font-medium">Event Timeline</span>
               </motion.div>
               <motion.h1
-                className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight"
+                className="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}

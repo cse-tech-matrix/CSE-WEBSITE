@@ -40,7 +40,7 @@ export default function ContactPage() {
             <GradientOrb className="-top-40 left-1/2 -translate-x-1/2" size={500} />
             <div className="relative z-10">
               <motion.h1
-                className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight"
+                className="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tight"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}

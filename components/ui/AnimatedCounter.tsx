@@ -50,7 +50,7 @@ export default function AnimatedCounter({
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
     >
-      <div className="text-4xl md:text-6xl font-bold font-mono text-gradient mb-2 tracking-tight">
+      <div className="text-3xl md:text-5xl font-bold font-mono text-gradient mb-2 tracking-tight">
         {prefix}
         {count}
         {suffix}

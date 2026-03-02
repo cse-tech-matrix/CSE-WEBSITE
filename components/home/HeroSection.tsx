@@ -46,7 +46,7 @@ function MatrixText() {
         <motion.span
           key={i}
           className={cn(
-            "inline-block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl",
+            "inline-block text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl",
             "font-extrabold font-heading tracking-tighter",
             letter === " " ? "w-4 sm:w-6 md:w-8" : "text-gradient"
           )}
