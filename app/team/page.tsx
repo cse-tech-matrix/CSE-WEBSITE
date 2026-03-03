@@ -90,7 +90,7 @@ function SectionDivider({ icon: Icon, title, subtitle }: { icon: typeof Users; t
   );
 }
 
-/* ─── Premium Leadership Card (HOD & Incharges) — NO crown ─── */
+/* ─── Premium Leadership Card (HOD & Incharges) ─── */
 function LeadershipCard({ member, label, delay = 0 }: { member: TeamMember; label: string; delay?: number }) {
   return (
     <motion.div
@@ -104,29 +104,44 @@ function LeadershipCard({ member, label, delay = 0 }: { member: TeamMember; labe
         <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-b from-white/[0.05] to-white/[0.01] backdrop-blur-xl border border-white/[0.08] hover:border-primary/40 transition-all duration-700 p-4 sm:p-8 md:p-10 text-center shadow-[0_0_0_0_rgba(99,102,241,0)] hover:shadow-[0_0_80px_-15px_rgba(99,102,241,0.3)]">
           <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
-          {/* Label badge */}
+          {/* Animated glow border */}
+          <div className="absolute -inset-px rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 overflow-hidden">
+            <motion.div
+              className="absolute inset-0"
+              style={{
+                background: "conic-gradient(from 0deg, #6366f1, #a855f7, #06b6d4, #ec4899, #6366f1)",
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            />
+          </div>
+
+          {/* Label badge with glow */}
           <motion.span
-            className="relative z-10 inline-flex items-center gap-1 sm:gap-2 px-2.5 py-1 sm:px-5 sm:py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent-purple/10 border border-primary/20 text-primary text-[9px] sm:text-xs font-semibold tracking-wider uppercase mb-3 sm:mb-6"
+            className="relative z-10 inline-flex items-center gap-1 sm:gap-2 px-2.5 py-1 sm:px-5 sm:py-2 rounded-full bg-gradient-to-r from-primary/10 to-accent-purple/10 border border-primary/20 text-primary text-[9px] sm:text-xs font-semibold tracking-wider uppercase mb-3 sm:mb-6 animate-glow-primary"
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: delay + 0.3, type: "spring", stiffness: 200 }}
           >
+            <Sparkles className="w-3 h-3" />
             {label}
           </motion.span>
 
-          {/* Avatar */}
+          {/* Avatar with animated ring */}
           <div className="relative mx-auto mb-3 sm:mb-6 w-24 h-24 sm:w-40 sm:h-40 md:w-48 md:h-48">
-            <div
-              className="absolute -inset-[3px] rounded-full animate-spin-slow"
+            <motion.div
+              className="absolute -inset-[3px] rounded-full opacity-30 group-hover:opacity-60 transition-opacity duration-500"
               style={{ background: "conic-gradient(from 0deg, #6366f1, #a855f7, #06b6d4, #ec4899, #6366f1)" }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
             />
             <div className="absolute inset-[2px] rounded-full bg-background" />
-            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-transparent">
+            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary/50 transition-colors duration-500">
               <img
                 src={member.image}
                 alt={member.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 loading="lazy"
               />
             </div>
@@ -134,6 +149,9 @@ function LeadershipCard({ member, label, delay = 0 }: { member: TeamMember; labe
 
           <h3 className="relative z-10 text-sm sm:text-xl md:text-2xl font-bold text-white">{member.name}</h3>
           <p className="relative z-10 mt-1 text-accent-purple font-medium text-xs sm:text-sm md:text-base">{member.role}</p>
+
+          {/* Bottom glow line */}
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary/60 transition-all duration-700" />
         </div>
       </motion.div>
     </motion.div>
@@ -155,12 +173,39 @@ function OfficeBearerCard({ member, index }: { member: TeamMember; index: number
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="group h-full"
       >
-        <div className="relative overflow-hidden rounded-2xl h-full flex flex-col items-center text-center glass-premium hover:border-primary/40 transition-all duration-700 p-6 sm:p-8">
-          <div className="relative mb-4 z-10">
+        <div className="relative overflow-hidden rounded-2xl h-full flex flex-col items-center text-center glass-premium hover:border-amber-400/40 transition-all duration-700 p-6 sm:p-8">
+          {/* Animated glow border */}
+          <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 overflow-hidden">
             <motion.div
-              className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-primary/50 via-accent-purple/50 to-accent-cyan/50 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-700"
+              className="absolute inset-0"
+              style={{
+                background: "conic-gradient(from 0deg, #f59e0b, #eab308, #f59e0b, #d97706, #f59e0b)",
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             />
-            <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-primary/50 transition-all duration-500">
+          </div>
+
+          {/* Role badge with animated glow */}
+          {member.role && (
+            <span className="relative z-10 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/40 text-amber-300 text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-4 animate-glow-amber">
+              <Sparkles className="w-3 h-3" />
+              {member.role}
+            </span>
+          )}
+
+          <div className="relative mb-4 z-10">
+            {/* Animated ring around avatar */}
+            <motion.div
+              className="absolute -inset-2 rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-500"
+              style={{
+                background: "conic-gradient(from 0deg, #f59e0b, transparent 30%, #eab308 60%, transparent 90%, #f59e0b)",
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            />
+            <div className="absolute -inset-1 rounded-full bg-background" />
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-amber-400/20 group-hover:border-amber-400/50 transition-all duration-500">
               <img
                 src={member.image}
                 alt={member.name}
@@ -169,18 +214,15 @@ function OfficeBearerCard({ member, index }: { member: TeamMember; index: number
               />
             </div>
           </div>
-          {member.role && (
-            <span className="relative z-10 inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-primary/15 to-accent-purple/15 border border-primary/25 text-primary text-[10px] font-bold uppercase tracking-wider mb-2">
-              {member.role}
-            </span>
-          )}
+
           <h4 className="relative z-10 font-bold text-white/90 group-hover:text-white transition-colors text-base sm:text-lg">
             {member.name}
           </h4>
           {member.year && (
             <p className="relative z-10 mt-1 text-[11px] text-slate-500 font-mono">{member.year}</p>
           )}
-          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary/60 transition-all duration-700" />
+
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-amber-400/0 to-transparent group-hover:via-amber-400/60 transition-all duration-700" />
         </div>
       </motion.div>
     </motion.div>
@@ -212,14 +254,35 @@ function CategoryMemberCard({
         transition={{ duration: 0.3, ease: "easeOut" }}
         className="group h-full"
       >
-        <div className="relative overflow-hidden rounded-xl h-full flex flex-col items-center text-center glass-premium hover:border-primary/30 transition-all duration-500 p-4">
+        <div className="relative overflow-hidden rounded-xl h-full flex flex-col items-center text-center glass-premium transition-all duration-500 p-4" style={{ borderColor: 'transparent' }}>
+          {/* Animated glow border on hover */}
+          <div className="absolute -inset-px rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 overflow-hidden">
+            <motion.div
+              className="absolute inset-0"
+              style={{
+                background: `conic-gradient(from 0deg, ${accent}, transparent 40%, ${accent} 70%, transparent)`,
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+            />
+          </div>
+
           {/* Hover sweep */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
           </div>
 
-          {/* Avatar */}
+          {/* Avatar with animated ring */}
           <div className="relative mb-3 z-10">
+            <motion.div
+              className="absolute -inset-1.5 rounded-full opacity-30 group-hover:opacity-70 transition-opacity duration-500"
+              style={{
+                background: `conic-gradient(from 0deg, ${accent}, transparent 30%, ${accent} 60%, transparent 90%, ${accent})`,
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            />
+            <div className="absolute -inset-0.5 rounded-full bg-background" />
             <div
               className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 transition-all duration-500"
               style={{ borderColor: `${accent}30` }}
@@ -238,14 +301,18 @@ function CategoryMemberCard({
             {member.name}
           </h4>
           <p className="relative z-10 mt-1 text-[10px] text-slate-500 font-mono">{member.year}</p>
+
+          {/* Animated member type tag */}
           <span
-            className="relative z-10 mt-1.5 inline-block px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide uppercase border"
+            className="relative z-10 mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide uppercase border animate-glow-category"
             style={{
               color: accent,
               borderColor: `${accent}40`,
               background: `${accent}15`,
-            }}
+              "--glow-color": accent,
+            } as React.CSSProperties}
           >
+            <Star className="w-2 h-2" style={{ fill: accent, color: accent }} />
             {isCore ? "Core Member" : "Executive Member"}
           </span>
 
@@ -346,11 +413,11 @@ export default function TeamPage() {
     const manualOrder: Record<string, string[]> = {
       "Event Management": [
         "Mr. M. Dhilip", "Mr. Santhosh Dinakaran", "Ms. S. Aashiqa Fathima",
-        "Ms. T. L. Jana Sri", "Mr. P. Y. Ashwin Uvraj", "Ms. Sruthi S",
+        "Ms. T. L. Jana Sri", "Mr. P. Y. Ashwin Uvraj", "Ms. S. Sruthi",
       ],
       "Logistics": ["Mr. K. Rumesh Kumaran", "Mr. A. Mohamed Abu Bakkar Siddiq"],
       "Web Designing": ["Mr. S. S. Arunesh", "Mr. M. Pradeesh", "Mr. U. Mahendran"],
-      "Video Editing": ["Mr. R. Sree Nandhu", "Mr. B. Harish Kumar", "Mr. Prithiv Krishna"],
+      "Video Editing": ["Mr. R. Sree Nandhu", "Mr. B. Harish Kumar", "Mr. G. Prithiv Krishna"],
       "Content Writing": [
         "Ms. T. Saarumathi", "Ms. S. Subaranjani", "Ms. A. K. Nandhana",
         "Ms. S. Dhivya", "Ms. R. Shamiksha", "Ms. E. Subitcha", "Ms. R. Dhanu Shree",
@@ -447,7 +514,6 @@ export default function TeamPage() {
 
           {/* ─── Association Incharges ─── */}
           <section className="py-4 sm:py-10 px-4">
-            <SectionDivider icon={Shield} title="Association Incharges" subtitle="Guiding the association with vision and expertise" />
             <div className="max-w-4xl mx-auto grid grid-cols-2 gap-3 sm:gap-8">
               {incharges.map((member, i) => (
                 <LeadershipCard key={member.name} member={member} label="Association Incharge" delay={i * 0.15} />

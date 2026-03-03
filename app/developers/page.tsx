@@ -204,30 +204,6 @@ export default function DevelopersPage() {
                                 {dev.name}
                               </h3>
                               <p className="text-sm text-slate-500 font-mono">{dev.year}</p>
-
-                              {/* Decorative animated code lines */}
-                              <div className="mt-8 w-full space-y-2 opacity-20 group-hover:opacity-50 transition-opacity duration-700">
-                                {[0.75, 0.5, 0.65, 0.4].map((w, j) => (
-                                  <motion.div
-                                    key={j}
-                                    className="flex gap-2 items-center"
-                                    style={{ paddingLeft: j > 0 ? 16 : 0 }}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.2 + j * 0.1 }}
-                                  >
-                                    {j === 0 && <div className="w-2 h-2 rounded-full" style={{ background: colors.accent }} />}
-                                    <div
-                                      className="h-1 rounded-full"
-                                      style={{
-                                        width: `${w * 100}%`,
-                                        background: `linear-gradient(to right, ${colors.accent}, transparent)`,
-                                      }}
-                                    />
-                                  </motion.div>
-                                ))}
-                              </div>
                             </div>
                           </div>
                         </motion.div>

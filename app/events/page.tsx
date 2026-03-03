@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Calendar, ExternalLink, Filter, Sparkles } from "lucide-react";
+import { Calendar, ExternalLink, Filter, Sparkles, Clock } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingShapes from "@/components/effects/FloatingShapes";
@@ -168,20 +168,30 @@ export default function EventsPage() {
                             {event.description}
                           </p>
 
-                          <motion.a
-                            href={event.driveLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={cn(
-                              "inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/40 text-primary text-sm font-medium hover:bg-primary/10 hover:shadow-lg hover:shadow-primary/10 transition-all",
+                          {event.comingSoon ? (
+                            <span className={cn(
+                              "inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-amber-500/40 text-amber-400 text-sm font-medium",
                               i % 2 === 0 ? "md:ml-auto" : ""
-                            )}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            View Gallery
-                            <ExternalLink className="w-3.5 h-3.5" />
-                          </motion.a>
+                            )}>
+                              <Clock className="w-3.5 h-3.5" />
+                              Gallery Coming Soon
+                            </span>
+                          ) : (
+                            <motion.a
+                              href={event.driveLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={cn(
+                                "inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/40 text-primary text-sm font-medium hover:bg-primary/10 hover:shadow-lg hover:shadow-primary/10 transition-all",
+                                i % 2 === 0 ? "md:ml-auto" : ""
+                              )}
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              View Gallery
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </motion.a>
+                          )}
                         </motion.div>
                       </div>
                     </motion.div>

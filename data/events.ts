@@ -5,6 +5,7 @@ export interface Event {
   driveLink: string;
   image?: string;
   category?: "symposium" | "celebration" | "ceremony" | "workshop" | "competition";
+  comingSoon?: boolean;
 }
 
 export interface EventYear {
@@ -20,8 +21,17 @@ export const eventsData: EventYear[] = [
         title: "SYNECTICS'26",
         date: "Feb 2026",
         description: "National Level Technical Symposium — the biggest edition yet with cutting-edge competitions and workshops.",
-        driveLink: "https://drive.google.com/drive/folders/1VM6eqTsIkMwTTzGYRlmEfsbjj-ShuXBa?usp=drive_link",
+        driveLink: "#",
         category: "symposium",
+        comingSoon: true,
+      },
+      {
+        title: "Innovation Day 2026",
+        date: "Feb 2026",
+        description: "A day dedicated to showcasing innovative projects, ideas, and technological breakthroughs by CSE students.",
+        driveLink: "#",
+        category: "competition",
+        comingSoon: true,
       },
     ],
   },

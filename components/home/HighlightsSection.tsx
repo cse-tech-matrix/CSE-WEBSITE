@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, Trophy, BookOpen, Rocket } from "lucide-react";
+import { Calendar, Trophy, BookOpen } from "lucide-react";
 import Link from "next/link";
 
 const highlights = [
@@ -26,13 +26,6 @@ const highlights = [
     gradient: "from-accent-cyan to-teal-600",
     href: "/events",
   },
-  {
-    icon: Rocket,
-    title: "Industry Connections",
-    description: "Bridging academics and industry through tech talks and placements.",
-    gradient: "from-pink-500 to-rose-600",
-    href: "/about",
-  },
 ];
 
 export default function HighlightsSection() {
@@ -50,7 +43,7 @@ export default function HighlightsSection() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {highlights.map((item, i) => (
             <motion.div
               key={item.title}

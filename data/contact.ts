@@ -1,6 +1,6 @@
 export const contactInfo = {
   address: "Erode - Perundurai, Main Road, Vaikkaalmedu, Erode, Tamil Nadu 638052",
-  phone: "+91 82483 70733 (Mr. M. Kavikumar)",
+  phone: "+91 82483 70733 (Mr. M. Kavikumar — Joint Secretary)",
   email: "cse.association.members@gmail.com",
   mapEmbedUrl:
     "https://www.google.com/maps?q=Nandha+Engineering+College,+Erode+-+Perundurai,+Main+Road,+Vaikkaalmedu,+Erode,+Tamil+Nadu+638052&output=embed",

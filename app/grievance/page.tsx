@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";
-import { FileWarning, ExternalLink, Phone, Mail, ShieldCheck, Sparkles } from "lucide-react";
+import { FileWarning, ExternalLink, Phone, Mail, ShieldCheck, Sparkles, Send } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingShapes from "@/components/effects/FloatingShapes";
@@ -103,17 +103,28 @@ export default function GrievancePage() {
                         feedback. All submissions are treated with confidentiality and
                         will be addressed promptly.
                       </p>
-                      <motion.a
-                        href={contactInfo.grievanceFormUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium shadow-lg shadow-red-500/25 hover:shadow-red-500/40 transition-shadow"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Open Grievance Form
-                        <ExternalLink className="w-4 h-4" />
-                      </motion.a>
+                      <div className="flex flex-wrap gap-4">
+                        <motion.a
+                          href={contactInfo.grievanceFormUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium shadow-lg shadow-red-500/25 hover:shadow-red-500/40 transition-shadow"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Open Grievance Form
+                          <ExternalLink className="w-4 h-4" />
+                        </motion.a>
+                        <motion.a
+                          href={`mailto:${contactInfo.email}?subject=${encodeURIComponent("Grievance Report - I Report Form")}&body=${encodeURIComponent("Dear CSE Association,\n\nI would like to report the following grievance:\n\n[Please describe your grievance here]\n\nRegards,\n[Your Name]\n[Your Year & Section]")}`}
+                          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border-2 border-red-500/40 text-red-400 font-medium hover:bg-red-500/10 hover:border-red-500/60 transition-all"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          I Report Form — through Mail
+                          <Send className="w-4 h-4" />
+                        </motion.a>
+                      </div>
                     </div>
                     <motion.div
                       className="hidden md:block"
@@ -155,17 +166,9 @@ export default function GrievancePage() {
                         {coord.name}
                       </h4>
                       <p className="text-sm text-primary mb-3">{coord.dept}</p>
-                      <p className="text-slate-400 flex items-center gap-2 mb-4">
+                      <p className="text-slate-400 flex items-center gap-2">
                         <Phone className="w-4 h-4" /> {coord.phone}
                       </p>
-                      <motion.a
-                        href={`tel:${coord.phone.replace(/\s/g, "")}`}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/40 text-primary text-sm font-medium hover:bg-primary/10 transition-all"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Phone className="w-3.5 h-3.5" /> Call Now
-                      </motion.a>
                     </GlassCard>
                   </motion.div>
                 ))}

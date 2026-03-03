@@ -77,7 +77,7 @@ export default function ContactPage() {
                   <h2 className="text-2xl font-bold text-white">Get In Touch</h2>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                   {[
                     { icon: MapPin, title: "Address", content: contactInfo.address },
                     { icon: Phone, title: "Phone", content: contactInfo.phone },
@@ -85,7 +85,7 @@ export default function ContactPage() {
                   ].map((item, i) => (
                     <motion.div
                       key={item.title}
-                      className="flex items-start gap-4 p-5 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 group"
+                      className="flex items-start gap-4 p-6 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 group"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}

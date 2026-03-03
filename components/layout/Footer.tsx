@@ -2,10 +2,13 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, ArrowUpRight, Code } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook, ArrowUpRight, Code, Home } from "lucide-react";
 import { contactInfo } from "@/data/contact";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isDevPage = pathname === "/developers";
   return (
     <footer className="relative border-t border-white/[0.06] bg-background/80 backdrop-blur-xl">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
@@ -96,12 +99,16 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Tech Matrix — CSE Association, Nandha Engineering College.
           </p>
           <Link
-            href="/developers"
+            href={isDevPage ? "/" : "/developers"}
             className="group inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:bg-primary/10 hover:border-primary/30 transition-all duration-300"
           >
-            <Code className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary" />
+            {isDevPage ? (
+              <Home className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary" />
+            ) : (
+              <Code className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary" />
+            )}
             <span className="text-[10px] sm:text-xs text-slate-400 group-hover:text-white transition-colors duration-300">
-              Meet the Developers
+              {isDevPage ? "Back to Home" : "Meet the Developers"}
             </span>
             <ArrowUpRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-slate-600 group-hover:text-primary transition-colors duration-300" />
           </Link>
