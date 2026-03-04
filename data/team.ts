@@ -50,9 +50,9 @@ export const executiveMembers: TeamMember[] = [
   { name: "Ms. A. J. Deshika", year: "II Year", image: "/office/Deshika.png", tag: "Technical" },
   { name: "Mr. B. Harish Kumar", year: "II Year", image: "/office/Harish.png", tag: "Video Editing" },
   { name: "Ms. T. L. Jana Sri", year: "II Year", image: "/office/Jana%20Sri.png", tag: "Event Management" },
-  { name: "Mr. M. Pradeesh", year: "II Year", image: "/office/Pradeesh.png", tag: "Web Designing" },
+  { name: "Mr. M. Pradeesh", year: "II Year", image: "/office/Pradeesh.jpg", tag: "Web Designing" },
   { name: "Mr. R. Rupanarayanan", year: "II Year", image: "/office/Rupan.png", tag: "Research & Development" },
-  { name: "Ms. R. Shamiksha", year: "II Year", image: "/office/Shamiksha.png", tag: "Content Writing" },
+  { name: "Ms. R. Shamiksha", year: "II Year", image: "/office/Shamiksha.jpg", tag: "Content Writing" },
   { name: "Mr. R. Sree Nandhu", year: "II Year", image: "/office/Sree%20Nandhu.png", tag: "Video Editing" },
   { name: "Ms. S. Rithika", year: "I Year", image: "/office/ritika.png", tag: "General" },
   { name: "Mr. K. Manish", year: "I Year", image: "/office/Manish.png", tag: "General" },
@@ -70,15 +70,18 @@ export const coreMembers: TeamMember[] = [
   { name: "Mr. R. Dharun Raj", year: "IV Year", image: "/core/Dharun Raj.png", tag: "General" },
   { name: "Ms. V. Shalini", year: "IV Year", image: "/core/Shalini V.png", tag: "General" },
   { name: "Mr. A. Mohamed Abu Bakkar Siddiq", year: "III Year", image: "/core/Abu Bakkar.png", tag: "Logistics" },
-  { name: "Ms. S. Dhivya", year: "III Year", image: "/core/dhivya.png", tag: "Content Writing" },
+  { name: "Ms. S. Dhivya", year: "III Year", image: "/core/dhivya.png", tag: "General" },
   { name: "Ms. S. Aashiqa Fathima", year: "II Year", image: "/core/Aashiqa.png", tag: "Event Management" },
   { name: "Mr. U. Mahendran", year: "II Year", image: "/core/Mahendran.png", tag: "Web Designing" },
   { name: "Mr. G. Prithiv Krishna", year: "II Year", image: "/core/Prithiv.png", tag: "Video Editing" },
   { name: "Ms. E. Subitcha", year: "II Year", image: "/core/Subitcha.png", tag: "Content Writing" },
+  { name: "Ms. N. Shalini", year: "III Year", image: "/office/Shalini%20N.png", tag: "Event Management" },
 ];
 
 export const developers: TeamMember[] = [
-  { name: "Mr. G. Mohana Prasath", role: "Lead Developer", year: "IV Year", image: "/Office bearers/Mohana prasath.png" },
-  { name: "Mr. S. R. Chanthuru", role: "Technical Architect", year: "IV Year", image: "/core/Chanthuru.png" },
+  { name: "Mr. G. Mohana Prasath", role: "Engineering Lead", year: "IV Year", image: "/Office bearers/Mohana prasath.png" },
+  { name: "Mr. S. R. Chanthuru", role: "Interface Engineer", year: "IV Year", image: "/core/Chanthuru.png" },
   { name: "Mr. M. Dhilip", role: "Principal Designer", year: "IV Year", image: "/office/Dhilip.png" },
+  { name: "Mr. R. Rupanarayanan", role: "Information Architect", year: "II Year", image: "/office/Rupan.png" },
+  { name: "Mr. K. Rumesh Kumaran", role: "Quality Strategist", year: "IV Year", image: "/office/Rumesh.png" },
 ];

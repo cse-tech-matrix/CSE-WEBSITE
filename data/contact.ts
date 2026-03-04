@@ -11,7 +11,7 @@ export const contactInfo = {
   },
   grievanceFormUrl: "https://forms.gle/qjgFheJSK5JZN6aM6",
   coordinators: [
-    { name: "Mr. R. Rupanarayanan", dept: "II Year", phone: "+91 63825 52533" },
-    { name: "Mr. M. Pradeesh", dept: "II Year", phone: "+91 94877 70881" },
+    { name: "Ms. R. Abinaya", dept: "III Year — CSE", phone: "+91 80154 89671" },
+    { name: "Ms. N. Shalini", dept: "III Year — CSE", phone: "+91 73392 54167" },
   ],
 };

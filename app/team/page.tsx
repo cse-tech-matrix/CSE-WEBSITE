@@ -254,9 +254,9 @@ function CategoryMemberCard({
         transition={{ duration: 0.3, ease: "easeOut" }}
         className="group h-full"
       >
-        <div className="relative overflow-hidden rounded-xl h-full flex flex-col items-center text-center glass-premium transition-all duration-500 p-4" style={{ borderColor: 'transparent' }}>
+        <div className="relative overflow-hidden rounded-2xl h-full flex flex-col items-center text-center glass-premium transition-all duration-500 p-6 sm:p-8" style={{ borderColor: 'transparent' }}>
           {/* Animated glow border on hover */}
-          <div className="absolute -inset-px rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 overflow-hidden">
+          <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 overflow-hidden">
             <motion.div
               className="absolute inset-0"
               style={{
@@ -284,7 +284,7 @@ function CategoryMemberCard({
             />
             <div className="absolute -inset-0.5 rounded-full bg-background" />
             <div
-              className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 transition-all duration-500"
+              className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 transition-all duration-500"
               style={{ borderColor: `${accent}30` }}
             >
               <img
@@ -297,14 +297,14 @@ function CategoryMemberCard({
           </div>
 
           {/* Info */}
-          <h4 className="relative z-10 font-bold text-white/90 group-hover:text-white transition-colors text-xs sm:text-sm leading-tight">
+          <h4 className="relative z-10 font-bold text-white/90 group-hover:text-white transition-colors text-base sm:text-lg leading-tight">
             {member.name}
           </h4>
-          <p className="relative z-10 mt-1 text-[10px] text-slate-500 font-mono">{member.year}</p>
+          <p className="relative z-10 mt-1 text-[11px] text-slate-500 font-mono">{member.year}</p>
 
           {/* Animated member type tag */}
           <span
-            className="relative z-10 mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide uppercase border animate-glow-category"
+            className="relative z-10 mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold tracking-wide uppercase border animate-glow-category"
             style={{
               color: accent,
               borderColor: `${accent}40`,
@@ -373,7 +373,7 @@ function CategorySection({
         </motion.div>
 
         {/* Members grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
           {members.map((member, i) => (
             <CategoryMemberCard
               key={member.name}
@@ -412,7 +412,7 @@ export default function TeamPage() {
     // Explicit ordering per category
     const manualOrder: Record<string, string[]> = {
       "Event Management": [
-        "Mr. M. Dhilip", "Mr. Santhosh Dinakaran", "Ms. S. Aashiqa Fathima",
+        "Mr. M. Dhilip", "Mr. Santhosh Dinakaran", "Ms. N. Shalini", "Ms. S. Aashiqa Fathima",
         "Ms. T. L. Jana Sri", "Mr. P. Y. Ashwin Uvraj", "Ms. S. Sruthi",
       ],
       "Logistics": ["Mr. K. Rumesh Kumaran", "Mr. A. Mohamed Abu Bakkar Siddiq"],
@@ -420,7 +420,7 @@ export default function TeamPage() {
       "Video Editing": ["Mr. R. Sree Nandhu", "Mr. B. Harish Kumar", "Mr. G. Prithiv Krishna"],
       "Content Writing": [
         "Ms. T. Saarumathi", "Ms. S. Subaranjani", "Ms. A. K. Nandhana",
-        "Ms. S. Dhivya", "Ms. R. Shamiksha", "Ms. E. Subitcha", "Ms. R. Dhanu Shree",
+        "Ms. R. Shamiksha", "Ms. E. Subitcha", "Ms. R. Dhanu Shree",
       ],
     };
     const yearOrder: Record<string, number> = { "IV Year": 0, "III Year": 1, "II Year": 2, "I Year": 3 };

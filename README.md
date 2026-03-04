@@ -65,9 +65,11 @@ public/               # Static assets (images, logos)
 
 ## Developers
 
-- Mr. G. Mohana Prasath — Lead Developer
-- Mr. S. R. Chanthuru — Technical Architect
+- Mr. G. Mohana Prasath — Engineering Lead
+- Mr. S. R. Chanthuru — Interface Engineer
 - Mr. M. Dhilip — Principal Designer
+- Mr. R. Rupanarayanan — Information Architect
+- Mr. K. Rumesh Kumaran — Quality Strategist
 
 ## License
 

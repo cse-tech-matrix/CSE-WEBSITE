@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Code2, Palette, Server, Terminal } from "lucide-react";
+import { Code2, Palette, Server, Terminal, Layout, Search } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingShapes from "@/components/effects/FloatingShapes";
@@ -10,26 +10,38 @@ import GradientOrb from "@/components/effects/GradientOrb";
 import { developers } from "@/data/team";
 
 const roleIcons: Record<string, typeof Code2> = {
-  "Lead Developer": Code2,
+  "Engineering Lead": Code2,
+  "Interface Engineer": Layout,
   "Principal Designer": Palette,
-  "Technical Architect": Server,
+  "Information Architect": Search,
+  "Quality Strategist": Server,
 };
 
 const roleColors: Record<string, { gradient: string; glow: string; accent: string }> = {
-  "Lead Developer": {
+  "Engineering Lead": {
     gradient: "from-cyan-400 to-blue-500",
     glow: "rgba(6, 182, 212, 0.3)",
     accent: "#06b6d4",
+  },
+  "Interface Engineer": {
+    gradient: "from-emerald-400 to-teal-500",
+    glow: "rgba(16, 185, 129, 0.3)",
+    accent: "#10b981",
   },
   "Principal Designer": {
     gradient: "from-pink-400 to-purple-500",
     glow: "rgba(236, 72, 153, 0.3)",
     accent: "#ec4899",
   },
-  "Technical Architect": {
-    gradient: "from-emerald-400 to-teal-500",
-    glow: "rgba(16, 185, 129, 0.3)",
-    accent: "#10b981",
+  "Information Architect": {
+    gradient: "from-amber-400 to-orange-500",
+    glow: "rgba(245, 158, 11, 0.3)",
+    accent: "#f59e0b",
+  },
+  "Quality Strategist": {
+    gradient: "from-violet-400 to-purple-500",
+    glow: "rgba(139, 92, 246, 0.3)",
+    accent: "#8b5cf6",
   },
 };
 
@@ -123,10 +135,10 @@ export default function DevelopersPage() {
           {/* Developer Cards */}
           <section className="py-16 px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
                 {developers.map((dev, i) => {
                   const Icon = roleIcons[dev.role || ""] || Code2;
-                  const colors = roleColors[dev.role || ""] || roleColors["Lead Developer"];
+                  const colors = roleColors[dev.role || ""] || roleColors["Engineering Lead"];
 
                   return (
                     <motion.div
